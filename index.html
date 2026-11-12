@@ -1,65 +1,428 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Felix Vargas | Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #090b14;
+    --card: #121625;
+    --text: #f5f5ff;
+    --muted: #a0a6ba;
+    --accent: #9b7bff;
+    --accent2: #55c7ff;
+    --border: rgba(255,255,255,.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    background: #693cff;
+    filter: blur(180px);
+    opacity: .15;
+    top: -150px;
+    left: -150px;
+    z-index: -1;
+}
+
+header {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.profile {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: grid;
+    place-items: center;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 25px;
+    box-shadow: 0 0 50px #9168ff55;
+}
+
+.tag {
+    color: var(--accent2);
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: clamp(32px, 6vw, 65px);
+    line-height: 1.15;
+    font-weight: 800;
+    background: linear-gradient(90deg, #fff, #bca8ff, #70d7ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+header p {
+    color: var(--muted);
+    margin: 18px 0 28px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 30px;
+    background: linear-gradient(100deg, #9069ff, #48bfff);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px #8b68ff55;
+}
+
+nav {
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+    width: fit-content;
+    max-width: 95%;
+    margin: -15px auto 55px;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    background: rgba(20, 24, 40, .85);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--accent2);
+}
+
+.container {
+    width: 88%;
+    max-width: 1050px;
+    margin: auto;
+}
+
+section {
+    padding: 55px 0;
+    scroll-margin-top: 85px;
+}
+
+.section-label {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 8px 0 25px;
+}
+
+.card {
+    background: linear-gradient(145deg, #171c2d, #101422);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #9476ff88;
+}
+
+.card p {
+    color: var(--muted);
+}
+
+.education-grid,
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.info {
+    margin-bottom: 15px;
+}
+
+.info strong {
+    display: block;
+    color: var(--accent2);
+    font-size: 13px;
+}
+
+.info span {
+    color: var(--text);
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill {
+    background: #22243b;
+    border: 1px solid #8d72ff55;
+    padding: 11px 18px;
+    border-radius: 30px;
+    color: #d5caff;
+    font-size: 13px;
+    transition: .3s;
+}
+
+.skill:hover {
+    background: #7654dd;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.project-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.project-grid h3 {
+    margin-bottom: 8px;
+}
+
+.contact-card {
+    text-align: center;
+}
+
+.contact-card a {
+    color: var(--accent2);
+    text-decoration: none;
+}
+
+.contact-card p {
+    margin: 12px 0;
+}
+
+footer {
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding: 30px 15px;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 60px;
+}
+
+@media(max-width: 650px) {
+    nav {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    nav a {
+        font-size: 11px;
+    }
+
+    .education-grid,
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <h1>PRINCE JOHN FELIX VARGAS</h1>
-        <p>Welcome to my personal portfolio!</p>
-    </header>
+<header>
+    <div class="profile">FV</div>
+    <div class="tag">WELCOME TO MY PORTFOLIO</div>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
+    <h1>PRINCE JOHN<br>FELIX VARGAS</h1>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I am a student passionate about
-        technology, programming, and learning new skills.</p>
-    </section>
+    <p>BSIT Student | Future IT Professional | Tech Enthusiast</p>
 
-    <section id="education">
-        <h2>Educational Background</h2>
-        <p>School: (CCDI) Computer Communication Development Institute</p>
-        <p>Grade/Year Level: 3rd year</p>
-        <p>Course/Strand: BSIT </p>
-    </section>
+    <a href="#about" class="btn">Explore My Portfolio ↗</a>
+</header>
 
-    <section id="skills">
-        <h2>My Skills</h2>
-        <ul>
-            <li>HTML and CSS</li>
-            <li>Basic JavaScript</li>
-            <li>Computer Literacy</li>
-            <li>Problem Solving</li>
-        </ul>
-    </section>
+<nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-    <section id="projects">
-        <h2>My Projects</h2>
-        <p>HealthTrack - Patient Record and
-        Appointment Management System</p>
-        <p>KAMOBITE - Business Plan Project</p>
-    </section>
+<main class="container">
 
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: felix172005@gmail.com  </p>
-        <p>GitHub: Felix Vargas17 </p>
-    </section>
+<section id="about">
+    <div class="section-label">01 / INTRODUCTION</div>
+    <h2>About Me</h2>
 
-    <footer>
-        <p>© 2026 My Student Portfolio</p>
-    </footer>
+    <div class="card">
+        <p>
+            Hello! I'm Prince John Felix Vargas, a 3rd-year
+            Bachelor of Science in Information Technology student.
+            I am passionate about technology, programming,
+            and discovering new skills. I enjoy learning how
+            technology can solve real-world problems and
+            creating useful digital projects.
+        </p>
+    </div>
+</section>
+
+<section id="education">
+    <div class="section-label">02 / MY JOURNEY</div>
+    <h2>Educational Background</h2>
+
+    <div class="education-grid">
+        <div class="card">
+            <div class="info">
+                <strong>INSTITUTION</strong>
+                <span>CCDI - Computer Communication Development Institute</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="info">
+                <strong>YEAR LEVEL</strong>
+                <span>3rd Year College</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="info">
+                <strong>COURSE</strong>
+                <span>Bachelor of Science in Information Technology</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="info">
+                <strong>FIELD</strong>
+                <span>Information Technology</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="section-label">03 / WHAT I CAN DO</div>
+    <h2>My Skills</h2>
+
+    <div class="card">
+        <div class="skills">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">Computer Literacy</span>
+            <span class="skill">Problem Solving</span>
+            <span class="skill">Web Development</span>
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="section-label">04 / MY WORK</div>
+    <h2>Featured Projects</h2>
+
+    <div class="project-grid">
+
+        <div class="card">
+            <div class="project-icon">🏥</div>
+            <h3>HealthTrack</h3>
+            <p>
+                Patient Record and Appointment Management System.
+                A project designed to organize patient information
+                and appointment records.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="project-icon">🍠</div>
+            <h3>KAMOBITE</h3>
+            <p>
+                A creative food business plan featuring
+                a sweet potato-based snack with a delicious
+                milk filling and milk syrup.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact">
+    <div class="section-label">05 / GET IN TOUCH</div>
+    <h2>Contact Me</h2>
+
+    <div class="card contact-card">
+        <p>Have a project or want to connect? Feel free to reach out!</p>
+
+        <p>✉ Email:
+            <a href="mailto:felix172005@gmail.com">
+                felix172005@gmail.com
+            </a>
+        </p>
+
+        <p>⌘ GitHub:
+            <span>Felix Vargas17</span>
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <p>© 2026 PRINCE JOHN FELIX VARGAS</p>
+    <p>Designed with passion and creativity.</p>
+</footer>
 
 </body>
-      </html>
+    </html>
+            
